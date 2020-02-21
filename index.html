@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Raffles</title>
+  <title>Raffles</title>
 </head>
 <style type="text/css">
-    table {
-      border-collapse: collapse;
+  table {
+    border-collapse: collapse;
   }
 
   table, th, td {
     width: 50%;
     border: 1px solid black;
-}
+  }
 </style>
 <body>
-    <input type="text" name="name" id="name">
-    <button onclick="addName()">Add name</button>
-    <br>
-    <div id="listofNames">
-    </div>
-    <br>
-    <button onclick="raffleName()">get name</button>
+  <input type="text" name="name" id="name">
+  <button onclick="addName()">Add name</button>
+  <br>
+  <div id="listofNames">
+  </div>  <br>
+  <button onclick="raffleName()">get name</button>
+  <br>
+  <br>
+  <div id="getName">
+  </div>
 </body>
 </html>
 <script type="text/javascript">
-    var x = [];
-    function addName(){
-        if(x.length > 0){
-            for (var i = 0; i < x.length; i++) {
-                if(x[i] != document.getElementById("name").value){
-                    x.push(document.getElementById("name").value);
-                }
-            }
-        } else {
-            x.push(document.getElementById("name").value);
-            
+  var x = [];
+  function addName(){
+    if(x.length > 0){
+      for (var i = 0; i < x.length; i++) {
+        if(x[i] != document.getElementById("name").value){
+          x.push(document.getElementById("name").value);
         }
-        console.log(x);
-        generateList(x);
+      }
+    } else {
+      x.push(document.getElementById("name").value);
+
     }
-    function raffleName(){
-        randomMonth = x[Math.floor(Math.random() * x.length)];
-        for (var i = 0; i <= x.length; i++) {
-           console.log(x[i], randomMonth);
-           if(x[i] == randomMonth){
-            x.splice(i, 1);
-        }
-        console.log(x);
-        generateList(x);
+    console.log(x);
+    generateList(x);
+  }
+  function raffleName(){
+    randomMonth = x[Math.floor(Math.random() * x.length)];
+    for (var i = 0; i <= x.length; i++) {
+      document.getElementById("getName").innerHTML =  "Value:" + randomMonth;
+
+      if(x[i] == randomMonth){
+        x.splice(i, 1);
+      }
+      generateList(x);
     }
-}
-function generateList(array){
+  }
+  function generateList(array){
     var body = document.getElementById('listofNames');
     body.innerHTML = '';
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
     for (var i = 0; i < array.length; i++) {
-        var row = document.createElement("tr");
-        for (var j = 0; j < 1; j++) {
-          var cell = document.createElement("td");
-          var cellText = document.createTextNode(array[i]);
-          cell.appendChild(cellText);
-          row.appendChild(cell);
+      var row = document.createElement("tr");
+      for (var j = 0; j < 1; j++) {
+        var cell = document.createElement("td");
+        var cellText = document.createTextNode(array[i]);
+        cell.appendChild(cellText);
+        row.appendChild(cell);
       }
       tblBody.appendChild(row);
-  }
-  tbl.appendChild(tblBody);
-  body.appendChild(tbl);
-  tbl.setAttribute("border", "1");
+    }
+    tbl.appendChild(tblBody);
+    body.appendChild(tbl);
+    tbl.setAttribute("border", "1");
 
-}
+  }
 </script>
